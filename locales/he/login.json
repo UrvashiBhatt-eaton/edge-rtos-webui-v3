@@ -1,0 +1,17 @@
+{
+  "Username": "שם משתמש",
+  "Password": "סיסמה",
+  "Company or Product Logo": "לוגו חברה או מוצר",
+  "Log In": "התחברות",
+  "Sign Up": "הירשם",
+  "Forgot Password?": "?שכחת את הסיסמא",
+  "Cybersecurity Badge": "תג אבטחה ברשת",
+  "By logging in, you agree to the following:": "על ידי כניסה, אתה מסכים לדברים הבאים:",
+  "Terms and Conditions.": "תנאים.",
+  "Privacy Policy.": "מדיניות פרטיות.",
+  "Firmware update session already in progress, please retry after some time.": "הפעלת עדכון הקושחה כבר בעיצומה, נסה שוב לאחר זמן מה.",
+  "Invalid User Credentials": "אישורי משתמש לא חוקיים",
+  "User Locked Temporarily": "משתמש נעול באופן זמני",
+  "Login Failed": "הכניסה נכשלה",
+  "Device Communication Failed": "תקשורת המכשיר נכשלה"
+}

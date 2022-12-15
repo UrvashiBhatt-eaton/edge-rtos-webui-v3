@@ -1,0 +1,17 @@
+{
+  "Username": "Benutzername",
+  "Password": "Passwort",
+  "Company or Product Logo": "Firmen- oder Produktlogo",
+  "Log In": "Anmeldung",
+  "Sign Up": "Anmelden",
+  "Forgot Password?": "Passwort vergessen?",
+  "Cybersecurity Badge": "Cybersicherheitsabzeichen",
+  "By logging in, you agree to the following:": "Mit Ihrer Anmeldung stimmen Sie den folgenden Bedingungen zu:",
+  "Terms and Conditions.": "Allgemeine Geschäftsbedingungen.",
+  "Privacy Policy.": "Datenschutz-Bestimmungen.",
+  "Firmware update session already in progress, please retry after some time.": "Firmware-update-Sitzung bereits läuft, wiederholen Sie den Vorgang nach einiger Zeit.",
+  "Invalid User Credentials": "Ungültige Benutzeranmeldeinformationen",
+  "User Locked Temporarily": "Benutzer vorübergehend gesperrt",
+  "Login Failed": "Login Fehlgeschlagen",
+  "Device Communication Failed": "Gerätekommunikation fehlgeschlagen"
+}

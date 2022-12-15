@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Simple App Control word",
+        "pid": "10014",
+        "value": "0"
+    },
+    {
+        "name": "Simple App status word",
+        "pid": "10015",
+        "value": "0"
+    },
+    {
+        "name": "Timezone",
+        "pid": "10033",
+        "value": "0"
+    },
+    {
+        "name": "Date Format",
+        "pid": "10034",
+        "value": "0"
+    },
+    {
+        "name": "Time Format",
+        "pid": "10035",
+        "value": "1"
+    }
+]

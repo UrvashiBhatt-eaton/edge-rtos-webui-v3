@@ -1,0 +1,17 @@
+{
+  "Username": "Username",
+  "Password": "Password",
+  "Company or Product Logo": "Company or Product Logo",
+  "Log In": "Log In",
+  "Sign Up": "Sign Up",
+  "Forgot Password?": "Forgot Password?",
+  "Cybersecurity Badge": "Cybersecurity Badge",
+  "By logging in, you agree to the following:": "By logging in, you agree to the following:",
+  "Terms and Conditions.": "Terms and Conditions.",
+  "Privacy Policy.": "Privacy Policy.",
+  "Firmware update session already in progress, please retry after some time.": "Firmware update session already in progress, please retry after some time.",
+  "Invalid User Credentials": "Invalid User Credentials",
+  "User Locked Temporarily": "User Locked Temporarily",
+  "Login Failed": "Login Failed",
+  "Device Communication Failed": "Device Communication Failed"
+}

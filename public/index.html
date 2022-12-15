@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>Eaton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="banner" style="display: none; text-align: center;">
+        <span style="font-size: 20px; color: #ca3c3d"> IE is not supported. Please use Chrome, MS Edge or Firefox. </span>
+    </div>
+
+   <script>
+      if (navigator.userAgent.match(/Trident.*rv\:11\./)) {
+           document.getElementById("banner").style.display = "block";
+           document.getElementById("root").style.display = "none";
+       }
+   </script>
+</body>
+
+</html>

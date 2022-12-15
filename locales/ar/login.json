@@ -1,0 +1,17 @@
+{
+  "Username": "اسم المستخدم",
+  "Password": "كلمه السر",
+  "Company or Product Logo": "شعار الشركة أو المنتج",
+  "Log In": "تسجيل الدخول",
+  "Sign Up": "سجل",
+  "Forgot Password?": "هل نسيت كلمة المرور؟",
+  "Cybersecurity Badge": "شارة الأمن السيبراني",
+  "By logging in, you agree to the following:": "بتسجيل الدخول ، أنت توافق على ما يلي:",
+  "Terms and Conditions.": "الأحكام والشروط.",
+  "Privacy Policy.": "سياسة خاصة.",
+  "Firmware update session already in progress, please retry after some time.": "جلسة تحديث البرامج الثابتة قيد التقدم بالفعل ، يرجى إعادة المحاولة بعد قليل.",
+  "Invalid User Credentials": "بيانات اعتماد المستخدم غير صالحة",
+  "User Locked Temporarily": "تم قفل المستخدم مؤقتًا",
+  "Login Failed": "فشل تسجيل الدخول",
+  "Device Communication Failed": "فشل اتصال الجهاز"
+}

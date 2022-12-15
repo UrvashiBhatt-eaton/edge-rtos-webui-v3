@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Simple App Control word",
+        "pid": "10014",
+        "value": "0"
+    },
+    {
+        "pid": "10033",
+        "value": "0"
+    },
+    {
+        "name": "Date Format",
+        "value": "0"
+    },
+    {
+        "name": "Time Format",
+        "pid": "10035"
+    }
+]

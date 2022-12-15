@@ -1,0 +1,164 @@
+# Pipeline for PR checks.
+# Stage Coverity - Coverity check.
+# Stage Test - UI test on F429 device.
+
+name: $(Build.DefinitionName)_$(Build.SourceBranch)_$(Date:yyyyMMdd)$(Rev:_r)
+
+resources:
+  repositories:
+    - repository: edge-rtos-ado-templates
+      type: github
+      name: etn-ccis/edge-rtos-ado-templates
+      endpoint: etn-ccis-rtos
+      ref: dev
+    - repository: edge-rtos-uberloader
+      type: github
+      name: etn-ccis/edge-rtos-uberloader
+      endpoint: etn-ccis-rtos
+      ref: dev
+    - repository: edge-rtos-app-iar
+      type: github
+      name: etn-ccis/edge-rtos-app-iar
+      endpoint: etn-ccis-rtos
+      ref: dev
+
+variables:
+  - group: rtos-dev-group
+
+# no automatic CI triggers
+trigger: none
+
+pr:
+  drafts: false
+  branches:
+    include:
+    - '*' 
+
+stages:
+- stage: Coverity
+  displayName: Coverity check
+  pool:
+    name: brtlr-edge-lab
+    demands:
+    - agent.os -equals Windows_NT
+  jobs:
+  - job:
+    displayName: Job, Coverity check
+    timeoutInMinutes: 60
+    cancelTimeoutInMinutes: 10
+    workspace:
+      clean: all
+
+    steps:
+    - checkout: edge-rtos-app-iar
+      submodules: recursive
+      path: s/ltk_sample_app
+      clean: true
+
+    - checkout: self
+      submodules: recursive
+      path: s/ltk_sample_app/RTK_Example/WebUI_2.0/PxGreenUIModule
+      clean: true
+
+    - template: rtos-iar-coverity-desktop-template.yml@edge-rtos-ado-templates
+      parameters:
+        working_directory: $(Build.SourcesDirectory)\ltk_sample_app\RTK_Example\WebUI_2.0\PxGreenUIModule
+        iar_directory: $(Build.SourcesDirectory)\ltk_sample_app
+
+- stage: builds_stage
+  displayName: Build stage
+  pool:
+    name: edge-windows-iar-scale-set
+
+  jobs:
+  - job:
+    displayName: Job, Build 
+    timeoutInMinutes: 180
+    cancelTimeoutInMinutes: 30
+    pool:
+        name: edge-windows-iar-scale-set
+
+    workspace:
+      clean: all
+    
+    steps:
+    - powershell: |
+        LightLicenseManager.exe setup -s AZEUSBLDTSTIAR1 -v 
+      displayName: 'Setup the iar cloud license server'
+
+    - checkout: edge-rtos-uberloader
+      fetchDepth: 1
+      submodules: recursive
+      path: s/uberloader
+      clean: true
+    
+    - checkout: edge-rtos-app-iar
+      fetchDepth: 1
+      submodules: recursive
+      path: s/ltk_sample_app
+      clean: true
+
+    - checkout: self
+      submodules: recursive
+      path: s/ltk_sample_app/RTK_Example/WebUI_2.0/PxGreenUIModule
+      clean: true
+
+    - template: rtos-iar-build-for-test-template.yml@edge-rtos-ado-templates
+      parameters:
+        device_to_test: "STM32F42xx"
+        board_config: "STM32F427"
+        linker_config: "RTK-stm32f427_flash_With_Uberloader.icf"
+        ip_type: "static"
+        static_ip: "192.168.1.251"
+        enable_iot: true
+        factory_reset: true
+        change_hash_define: "LOGGING_SUPPORT"
+        uberloader_working_directory: $(Build.SourcesDirectory)\uberloader
+        primary_working_directory: $(Build.SourcesDirectory)\ltk_sample_app\RTK_Example
+        artifact_name: "STM32F427"
+
+    # Generate web (1) codepack for local signed (1) image with web_ui version 2.0  (2)
+    - template: rtos-codepack-template.yml@edge-rtos-ado-templates
+      parameters:
+        board_config: "STM32F427"
+        processor: 3
+        codepack_select: 1
+        code_sign: 1
+        web_ui_type: 2
+        artifact_name: "STM32F427"
+
+- stage: Test
+  displayName: UI test F429
+  dependsOn: builds_stage
+  condition: succeeded('builds_stage')
+  pool:
+    name: brtlr-edge-lab
+    demands:
+    - agent.os -equals Windows_NT
+    - MultiboardSetup -equals static
+  jobs:
+  - job:
+    displayName: Job, UI test F429
+    timeoutInMinutes: 180
+    cancelTimeoutInMinutes: 10
+    workspace:
+      clean: all
+
+    steps:
+    - checkout: edge-rtos-app-iar
+      submodules: recursive
+      path: s/ltk_sample_app
+      clean: true
+
+    - checkout: self
+      submodules: recursive
+      path: s/ltk_sample_app/RTK_Example/WebUI_2.0/PxGreenUIModule
+      clean: true
+      
+    # Run tests under ui core repo
+    - template: rtos-ui-test-template.yml@edge-rtos-ado-templates
+      parameters:
+        device_to_test: "STM32F42xx"
+        board_config: "STM32F427"
+        module_name : ["PxGreenUIModule"]
+        artifact_name: "STM32F427"

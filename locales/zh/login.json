@@ -1,0 +1,17 @@
+{
+  "Username": "用户名",
+  "Password": "密码",
+  "Company or Product Logo": "公司或产品徽标",
+  "Log In": "登录",
+  "Sign Up": "注册",
+  "Forgot Password?": "忘记密码?",
+  "Cybersecurity Badge": "网络安全徽章",
+  "By logging in, you agree to the following:": "登录即表示您同意以下内容:",
+  "Terms and Conditions.": "条款和条件。",
+  "Privacy Policy.": "隐私政策。",
+  "Firmware update session already in progress, please retry after some time.": "固件更新届会议已经在进行中，请重试之后的某个时候。",
+  "Invalid User Credentials": "无效的用户凭证",
+  "User Locked Temporarily": "用户暂时锁定",
+  "Login Failed": "登录失败",
+  "Device Communication Failed": "设备通讯失败"
+}
