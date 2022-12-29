@@ -1,13 +1,21 @@
+// Framework imports
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+// Material-UI
 import { useTheme } from "@mui/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+
+// Assets
 import productLogo from "./assets/images/pxgreen.svg";
 import cybersecurityLogo from "./assets/images/cyber_logo.jpg";
 import eatonLogo from "./assets/images/eatonlogo.svg";
+
+// Translator
 import Translator from "./translator/translator";
+
 import { connect } from "react-redux";
 
 // Routing components
@@ -16,22 +24,25 @@ import { CardLayout, ListLayout } from "@brightlayer-ui/layouts";
 import EditSettingsMessage from "@brightlayer-ui/layouts/dist/px-components/settings/editSettingsMessage";
 import DateDisplayContainer from "@brightlayer-ui/layouts/dist/px-components/dateDisplayContainer";
 import IotDisplayContainer from "@brightlayer-ui/layouts/dist/px-components/iotDisplayContainer";
-import CaCertificateContainer from "./px-components/caCertificateContainer";
+import CaCertificateContainer from "./components/caCertificateContainer";
 import DeviceConnectionLostModal from "@brightlayer-ui/layouts/dist/px-components/modal/conLostModal";
 import MustChangePassword from "@brightlayer-ui/layouts/dist/px-components/MustChangePassword";
 import DeviceRestartAlertModal from "@brightlayer-ui/layouts/dist/px-components/modal/deviceRestartModal";
 import SessionExpiredContainer from "@brightlayer-ui/layouts/dist/px-components/sessionExpiredContainer";
 import BackdropScreen from "@brightlayer-ui/layouts/dist/px-components/backdropScreen";
+
+// Brightlayer imports
 import * as PXBColors from "@brightlayer-ui/colors";
 
-import LoginLayout from "./px-components/layouts/LoginLayoutContainer";
-import EulaCard from "./px-components/EulaCard";
-import Logs from "./px-components/Logs";
-import Table from "./px-components/CustomTableContainer";
-import UserMenu from "./px-components/UserMenuContainer";
-import FirmwareUpdateContainer from "./px-components/firmware/FirmwareUpdateContainer";
-import UserManagement from "./px-components/layouts/UserManagement";
-import HttpDisabledModal from "./px-components/HttpDisabledModal";
+import LoginLayout from "./components/layouts/LoginLayoutContainer";
+import EulaCard from "./components/EulaCard";
+import Logs from "./components/Logs";
+import Table from "./components/CustomTableContainer";
+import UserMenu from "./components/UserMenuContainer";
+import FirmwareUpdateContainer from "./components/firmware/FirmwareUpdateContainer";
+import UserManagement from "./components/layouts/UserManagement";
+import HttpDisabledModal from "./components/HttpDisabledModal";
+import PasswordChange from "./components/PasswordChange";
 
 import {
   login,
@@ -181,7 +192,7 @@ function getNestedComponents(page, pageProps) {
 }
 
 //class GreenCore extends React.Component {
-function GreenCore(props) {
+function App(props) {
   const {
       productLogo,
       productName,
@@ -288,6 +299,7 @@ function GreenCore(props) {
               changePassword={changePasswordAction}
               appLogout={appLogout}
               clearPasswordWarning={clearPasswordWarning}
+              template={PasswordChange}
             />
             {
               <Toolbar variant="dense">
@@ -348,13 +360,13 @@ function GreenCore(props) {
     </>
   );
 }
-GreenCore.propTypes = {
+App.propTypes = {
   authEnabled: PropTypes.bool.isRequired,
   reducers: PropTypes.object,
   dataURL: PropTypes.string,
   pageProps: PropTypes.object
 };
-GreenCore.defaultProps = {
+App.defaultProps = {
   authEnabled: true,
   productVersion: "2.9",
   productLogo: productLogo,
@@ -368,4 +380,4 @@ const mapStateToProps = (state) => {
     paramMeta: state.paramMeta
   };
 };
-export default connect(mapStateToProps, null)(GreenCore);
+export default connect(mapStateToProps, null)(App);

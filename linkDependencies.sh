@@ -10,7 +10,7 @@ BGREEN='\033[1;32m' #BOLD
 GRAY='\033[1;30m'
 NC='\033[0m' # No Color
 PxBlueModule=node_modules/@brightlayer-ui/PxBlueModule
-OurUIModule=PxGreenUIModule
+#OurUIModule=PxGreenUIModule
 core=green-core
 
 echo -e
@@ -47,9 +47,9 @@ if [ $1 != 1 ]; then
     echo -e "${BLUE}Seed Router...${NC}"
     cd ${PxBlueModule}/seed-router && npm install --legacy-peer-deps && cd ../../../..
     echo -e
-    echo -e "${BLUE}Core...${NC}"
-    cd ${OurUIModule} && npm install --legacy-peer-deps && cd ..
-    echo -e
+    #echo -e "${BLUE}Core...${NC}"
+    #cd ${OurUIModule} && npm install --legacy-peer-deps && cd ..
+    #echo -e
     echo -e "${BLUE}APP...${NC}"
     npm install --legacy-peer-deps
     echo -e
@@ -68,6 +68,24 @@ if [ $1 != 1 ]; then
     mkdir -p "$dstpath"
         echo -e "${BBLUE}########################################${NC}"
         echo -e "${BBLUE}##### COPYING CONFIGURATION FILES ######${NC}"
+        echo -e "${BBLUE}########################################${NC}"
+    cp -r "$1" "$dstpath"
+        echo -e
+        echo -e "${BGREEN}DONE${NC}"
+        echo -e
+fi
+
+#Index.html File copy from Source To Destination Folder
+if [ $1 != 1 ]; then
+    #srcpath="../../../../Workspace/edge-rtos-babelfish-v3/examples/services/civetweb_http_webserver"
+    dstpath="./public"
+    if [ ! -d "$1" ]; then
+        echo "Source path: $1 doesn't exist"
+        exit 1
+    fi
+    mkdir -p "$dstpath"
+        echo -e "${BBLUE}########################################${NC}"
+        echo -e "${BBLUE}###### COPYING Index.html FILE ######${NC}"
         echo -e "${BBLUE}########################################${NC}"
     cp -r "$1" "$dstpath"
         echo -e
@@ -97,14 +115,14 @@ if [ -z $skipBlue ]; then
         echo -e
     fi
 fi
-if [ -z $skipOurs ]; then
-    echo -e
-    echo -e "${BLUE}Core...${NC}"
-    cd ${OurUIModule} && npm run-script build && cd ..
-    echo -e
-    echo -e "${BGREEN}DONE${NC}"
-    echo -e
-fi
+# if [ -z $skipOurs ]; then
+#     echo -e
+#     echo -e "${BLUE}Core...${NC}"
+#     cd ${OurUIModule} && npm run-script build && cd ..
+#     echo -e
+#     echo -e "${BGREEN}DONE${NC}"
+#     echo -e
+# fi
 
 # Remove old links
 echo -e "${BBLUE}########################################${NC}"
@@ -114,9 +132,9 @@ echo -e
 
 rm -rf node_modules/.cache
 
-if [ -z $skipOurs ]; then
-    rm -rf node_modules/@brightlayer-ui/${core}
-fi
+# if [ -z $skipOurs ]; then
+#     rm -rf node_modules/@brightlayer-ui/${core}
+# fi
 if [ -z $skipBlue ]; then
     if [ -z $skipNonBlueLayouts ]; then
         rm -rf node_modules/@brightlayer-ui/seed-router
@@ -139,7 +157,7 @@ echo -e "${BBLUE}######### CREATING NEW FOLDERS #########${NC}"
 echo -e "${BBLUE}########################################${NC}"
 echo -e
 
-mkdir -p "node_modules/@brightlayer-ui/"${core}
+#mkdir -p "node_modules/@brightlayer-ui/"${core}
 mkdir -p "node_modules/@brightlayer-ui/seed-router"
 mkdir -p "node_modules/@brightlayer-ui/layouts"
 mkdir -p "node_modules/@brightlayer-ui/utilities"
@@ -176,15 +194,15 @@ if [ -z $skipBlue ]; then
         echo -e
     fi
 fi
-if [ -z $skipOurs ]; then
-    echo -en "${BLUE}Core...${NC}"
-    cp -r ${OurUIModule}/package.json node_modules/@brightlayer-ui/${core}/package.json
-    cp -r ${OurUIModule}/src/assets ${OurUIModule}/dist/
-    cp -r ${OurUIModule}/dist node_modules/@brightlayer-ui/${core}/
-    echo -e "${GREEN}Linked${NC}"
-    echo -e
-    echo -e
-fi
+# if [ -z $skipOurs ]; then
+#     echo -en "${BLUE}Core...${NC}"
+#     cp -r ${OurUIModule}/package.json node_modules/@brightlayer-ui/${core}/package.json
+#     cp -r ${OurUIModule}/src/assets ${OurUIModule}/dist/
+#     cp -r ${OurUIModule}/dist node_modules/@brightlayer-ui/${core}/
+#     echo -e "${GREEN}Linked${NC}"
+#     echo -e
+#     echo -e
+# fi
 
 # Verify that the linking is complete
 echo -e "${BBLUE}########################################${NC}"
@@ -231,19 +249,19 @@ if [ -z $skipBlue ]; then
     fi
 fi
 
-if [ -z $skipOurs ]; then
-    echo -en "${BLUE}Core...${NC}"
-    if [ ! -f node_modules/@brightlayer-ui/${core}/package.json ]; then echo -e "${BRED}Not Linked${NC}" && exit 1; fi
-    if [ ! -s node_modules/@brightlayer-ui/${core}/dist ]; 
-        then 
-            if [ ! -f node_modules/@brightlayer-ui/${core}/dist/index.js ];
-                then echo -e "${BRED}Not Linked${NC}" && exit 1; 
-            fi
-    fi
-    echo -e "${GREEN}Verified${NC}"
-    echo -e
-    echo -e
-fi
+# if [ -z $skipOurs ]; then
+#     echo -en "${BLUE}Core...${NC}"
+#     if [ ! -f node_modules/@brightlayer-ui/${core}/package.json ]; then echo -e "${BRED}Not Linked${NC}" && exit 1; fi
+#     if [ ! -s node_modules/@brightlayer-ui/${core}/dist ]; 
+#         then 
+#             if [ ! -f node_modules/@brightlayer-ui/${core}/dist/index.js ];
+#                 then echo -e "${BRED}Not Linked${NC}" && exit 1; 
+#             fi
+#     fi
+#     echo -e "${GREEN}Verified${NC}"
+#     echo -e
+#     echo -e
+# fi
 
 echo -e "${BGREEN}########################################${NC}"
 echo -e "${BGREEN}####### LINKING MODULES COMPLETE #######${NC}"

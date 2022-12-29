@@ -1,15 +1,16 @@
 import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "@brightlayer-ui/green-core/dist/redux/store";
-import { appPages } from "./configuration/appPages";
+import { store } from "./redux/store";
+import { appPages } from "@brightlayer-ui/configuration/appPages";
 import { /*CHANNEL_COUNT,*/ REFRESH_MS, CHANNEL_URI_MAX_SIZE } from "./constants/constants";
-import GreenSeed from "@brightlayer-ui/green-core";
-import PB from "@brightlayer-ui/green-core/dist/communication/pb";
+//import GreenSeed from "@brightlayer-ui/green-core";
+import App from "./App";
+import PB from "./communication/pb";
 import raw_to_readable from "./format_handling/raw_to_readable";
 import readable_to_raw from "./format_handling/readable_to_raw";
-import Custom from "./layouts/Custom";
-import EulaContent from "./layouts/eulaContent";
+import Custom from "./components/layouts/Custom";
+import EulaContent from "./components/EulaCard";
 import { RTLThemeProvider } from "./RTLThemeProvider.tsx";
 import "./index.css";
 //import productLogo from "./assets/images/product_logo.jpg";
@@ -60,7 +61,7 @@ root.render(
   <Suspense fallback="loading">
     <Provider store={initialStore}>
       <RTLThemeProvider>
-        <GreenSeed
+        <App
           reducers={{}}
           appPages={appPages}
           //productLogo={productLogo}
